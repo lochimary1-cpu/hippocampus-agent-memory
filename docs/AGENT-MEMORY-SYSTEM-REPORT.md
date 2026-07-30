@@ -741,7 +741,7 @@ python hooks/memory-core.py revise-memory \
 printf '%s\n' '{
   "session_id": "test-session",
   "transcript_path": "",
-  "cwd": "C:/Users/Administrator/.claude",
+  "cwd": "C:/Users/<your-username>/.claude",
   "hook_event_name": "SessionEnd"
 }' | bash "$HOME/.claude/hooks/memory-save.sh"
 ```
@@ -838,7 +838,7 @@ python hooks/memory-core.py retrieve \
   --scope global --cwd "$HOME/.claude"
 
 # 步骤 6: SessionEnd 测试
-printf '%s\n' '{"session_id":"test","transcript_path":"","cwd":"C:/Users/Administrator/.claude","hook_event_name":"SessionEnd"}' | bash hooks/memory-save.sh
+printf '%s\n' '{"session_id":"test","transcript_path":"","cwd":"$HOME/.claude","hook_event_name":"SessionEnd"}' | bash hooks/memory-save.sh
 ```
 
 ## 11.2 健康检查通过标准
