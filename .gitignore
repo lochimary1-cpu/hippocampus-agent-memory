@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+
+# System files (generated at runtime — do NOT commit real memory data)
+_system/
+sessions/*.json
+!examples/memory-structure-example/sessions/_current.json
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Config (rename memory-config.json to .memory-config.json for actual use)
