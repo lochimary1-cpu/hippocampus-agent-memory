@@ -10,6 +10,16 @@
 
 ---
 
+## 👥 这个项目适合谁？
+
+- **搭 Agent / RAG / 自动化流程的开发者**：Agent 每次对话"聊完就忘"？这个系统给它装上跨会话记忆
+- **想让编码 Agent 记住你的偏好和踩过的坑**：配置成 SessionStart / SessionEnd Hook，自动记忆、自动巩固
+- **对"AI 记忆与认知架构"感兴趣的学习者**：一份可运行的分层记忆实现，直接映射认知科学概念
+
+**不适合**：需要大规模语义向量检索的生产系统（本项目基于关键词检索，见「当前局限」）。
+
+---
+
 ## 🤔 为什么需要这个系统？
 
 所有大语言模型本质上是**无状态的**。每次对话都像第一次见面。上下文窗口是唯一的"记忆"，但它：
@@ -44,6 +54,30 @@
 │   sessions/_current.json                     │
 │   寿命: 当前会话                                │
 └─────────────────────────────────────────────┘
+```
+
+### 可视化架构图
+
+```mermaid
+graph TD
+    subgraph Working["工作记忆 · 前额叶"]
+        W1["sessions/_current.json<br/>当前会话"]
+    end
+    subgraph Hippocampus["海马体"]
+        C2["情景记忆<br/>sessions/archive/*.json"]
+        C1["候选队列 _system/candidates.json<br/>五维评分 → 晋升 / 归档 / 丢弃"]
+    end
+    subgraph Neocortex["长期记忆 · 新皮层"]
+        S1["语义记忆 global/*.md"]
+        S2["程序性记忆 global/procedures.md"]
+    end
+
+    W1 -->|SessionEnd 四阶段处理| C1
+    C1 -->|promote 晋升| S1
+    C1 -->|archive 归档| C2
+    C1 -->|discard 丢弃| D["遗忘 (decay / soft-retire)"]
+    C2 -->|记忆巩固| S1
+    S1 -.->|SessionStart 检索| W1
 ```
 
 ### 认知科学映射
@@ -184,9 +218,11 @@ hippocampus-agent-memory/
 ├── memory-health.py        # 只读健康检查
 ├── memory-config.json      # 评分/压缩/衰减参数配置
 ├── docs/
-│   └── AGENT-MEMORY-SYSTEM-REPORT.md  # 完整技术报告（中文）
+│   ├── AGENT-MEMORY-SYSTEM-REPORT.md  # 完整技术报告（中文）
+│   └── RELEASE-CHECKLIST.md           # 发布检查清单
 ├── examples/
 │   └── memory-structure-example/      # 记忆目录结构模板
+├── CHANGELOG.md                       # 迭代变更记录
 ├── README.md
 ├── LICENSE
 └── .gitignore
@@ -225,6 +261,8 @@ python memory-core.py rebuild-index
 完整的设计哲学、认知科学映射、问题修复记录和操作手册，请参阅：
 
 👉 **[AGENT-MEMORY-SYSTEM-REPORT.md](docs/AGENT-MEMORY-SYSTEM-REPORT.md)**（中文，878 行）
+
+变更历史见 **[CHANGELOG.md](CHANGELOG.md)**；每次发布前请走一遍 **[发布检查清单](docs/RELEASE-CHECKLIST.md)**。
 
 ---
 
