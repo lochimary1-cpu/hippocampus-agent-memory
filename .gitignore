@@ -1,23 +1,30 @@
-# Python
+# Python build and test artifacts
 __pycache__/
 *.py[cod]
-*.pyo
+.pytest_cache/
+dist/
+build/
 *.egg-info/
 
-# System files (generated at runtime — do NOT commit real memory data)
+# Local memory stores and host runtime artifacts
+.hippocampus/
 _system/
-sessions/*.json
-!examples/memory-structure-example/sessions/_current.json
+sessions/
+hippocampus-shadow/
+*.jsonl
 
-# Editor
+# Local-only host adapters and migration notes
+adapters/
+docs/claude-code-migration.md
+docs/phase-1-status.md
+docs/shadow-validation.md
+docs/current-project-status.md
+
+# Editor and operating-system files
 .vscode/
 .idea/
 *.swp
 *.swo
 *~
-
-# OS
 .DS_Store
 Thumbs.db
-
-# Config (rename memory-config.json to .memory-config.json for actual use)

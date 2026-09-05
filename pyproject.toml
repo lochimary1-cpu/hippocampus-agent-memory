@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hippocampus-memory"
+version = "0.2.0"
+description = "Local-first, hippocampus-inspired memory lifecycle for AI agents"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+
+[project.urls]
+Repository = "https://github.com/lochimary1-cpu/hippocampus-agent-memory"
+Issues = "https://github.com/lochimary1-cpu/hippocampus-agent-memory/issues"
+
+[project.scripts]
+hippocampus-memory = "hippocampus_memory.cli:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]

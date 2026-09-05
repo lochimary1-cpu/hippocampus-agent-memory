@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Hippocampus Memory Lifecycle Event v1",
+  "type": "object",
+  "required": ["version", "event", "payload"],
+  "properties": {
+    "version": {"const": 1},
+    "event": {
+      "enum": [
+        "task.context_requested",
+        "task.event",
+        "task.finished",
+        "memory.feedback",
+        "memory.consolidate",
+        "memory.maintain",
+        "memory.metrics"
+      ]
+    },
+    "session_id": {"type": "string", "maxLength": 200},
+    "project_id": {"type": "string", "maxLength": 200},
+    "cwd": {"type": "string"},
+    "payload": {"type": "object"}
+  },
+  "additionalProperties": false
+}
